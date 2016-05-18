@@ -1,9 +1,16 @@
 language: ruby
 rvm:
-  - 2.1.9
+- 2.1.9
 before_script:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-  - sleep 3 # give xvfb some time to start
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- sleep 3
 script:
-  - bundle exec rake test
+- bundle exec rake test
+env:
+  global:
+    secure: ARNQhW2RPfdDkCh33AP9ogRGMGcmcxRpWE0iX/FjpXui/UeyQKpi9kstqdflyYso42K6NbYE2wHv0cMxAJoVXYbb5F0sW5hzySFa9EGZIPdJSA4mMAOV0XDrU9MMIpdhAKg0yTzp8NM89RtZWo50y6HdcOlA/4Jt/1qu1IRqnBqJPXfGq7jhLE9W/YbWbTfgbIGXzYtN3mBpwcR+VsH0MvgI2XdXE4yFsCFAU0cotyHpiAokQPsizHgNhXZlfzNpanXglz5jzhMSr4lUhNZLQjom9XnscTpHkzrKPpqeOisGextiELgzUIzkadMxQHJwJhyn/ZS/KCQI0fKW/9dcsDw7g2XY99jnP8ImTcpxzkAvmEda3aap2nbC72jqO0AQqX9R8IR9JQq2VDQ6w8WsQEUcPG1bcfAV+sNt174ygnUioPJhPmeywIsdWCWAwE/7glVzl0380aRFBs+7vDk7OsBOfB2Xje95k6YYTxJHniBc/c3n5pOw+niLQCFY7bKSRCleHfWs+ZXWcicIzVyB+mom3iNP6bXIf151t65vPcK+hHT6E3X99+JzSG1Bhp3FtcoDQ6Jf1TSFPH5RQDhUJUAebfUsH+SXUBu0I9UbnZqzXi/1BEq+4TI0a0slfifTssL3Nyzf2Qzqt8RpZMtqUZTBMZRW6im6cDkH/6MJ8bc=
+after_success:
+  - "curl -o /tmp/travis-automerge https://raw.githubusercontent.com/cdown/travis-automerge/master/travis-automerge"
+  - "chmod a+x /tmp/travis-automerge"
+  - "BRANCHES_TO_MERGE_REGEX='' BRANCH_TO_MERGE_INTO=master GITHUB_REPO=VeV-2016-1/TEM-DF /tmp/travis-automerge"
