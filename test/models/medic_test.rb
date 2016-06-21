@@ -44,6 +44,10 @@ class MedicTest < ActiveSupport::TestCase
         assert Medic.search("Informe a Especialidade", @work_unit.name)
     end
 
+    test "Search with name field empty" do
+        assert Medic.search("Informe o Nome", @work_unit.name)
+    end
+
     test "Search with work_unit field empty" do
         assert Medic.search(@medic.speciality, "Informe a Região")
     end
@@ -57,4 +61,10 @@ class MedicTest < ActiveSupport::TestCase
         assert_nil Medic.search(@medic.speciality, "ERROR")
         assert_nil Medic.search("ERROR", "ERROR")
     end
+
+  test "if get a medic by a name" do
+      #@medic = Medic.where(name: "test2")
+      @medic = Medic.find_by_name("test2")
+      assert_equal @medic.name, "test2"
+  end
 end
