@@ -63,7 +63,6 @@ class MedicTest < ActiveSupport::TestCase
     end
 
   test "if get a medic by a name" do
-      #@medic = Medic.where(name: "test2")
       @medic = Medic.find_by_name("test2")
       assert_equal @medic.name, "test2"
   end
