@@ -188,5 +188,15 @@ class UsersControllerTest < ActionController::TestCase
         assert_nil assigns(:user).token_email
         assert assigns(:user).account_status
     end
+
+    test "shouldn't create user with an existing email" do
+        assert_no_difference('User.count') do
+            post :create, user: {username: "new", email: "roberto@gmail.com", 
+                password: "test", password_confirmation: "test"}
+        end
+
+        assert_template :new
+    end
+
 end
 
